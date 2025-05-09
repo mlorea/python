@@ -1,0 +1,103 @@
+"""
+
+Juego de Adivinar la Palabra
+
+Define una función llamada `jugar_adivinanza` que tome una palabra secreta (string) como parámetro. Sería como el ahorcado, pero sin la parte de dibujar.
+
+- La función debe permitir al usuario ingresar letras para adivinar la palabra. (Ingresa una sola letra a la vez).  
+- Mantén un registro de las letras adivinadas y muestra el progreso de la palabra (con guiones bajos para las letras no adivinadas).  
+- El juego termina cuando el usuario adivina la palabra completa o ingresa un número máximo de intentos fallidos (por ejemplo, 5).  
+- La función debe imprimir un mensaje indicando si el jugador ganó o perdió.
+- No es obligatorio, pero el que sepa hacerlo genere un modulo con las funciones necesarias para el juego.
+"""
+
+# Pseudocódigo - Juego de Adivinar la Palabra
+# --------------------------------------------
+#
+# 1. Definir la función principal llamada jugar_adivinanza que reciba la palabra secreta como parámetro.
+#
+# 2. Inicializar variables:
+#    - lista con los caracteres de la palabra secreta.
+#    - lista con guiones bajos (_), del mismo largo que la palabra, para mostrar el progreso.
+#    - una lista vacía para registrar las letras adivinadas.
+#    - un contador para llevar la cuenta de intentos fallidos.
+#
+# 3. Crear un bucle para permitir que el usuario ingrese letras hasta que adivine la palabra o alcance el número máximo de intentos fallidos:
+#    - Si la letra ingresada ya ha sido adivinada, mostrar un mensaje y pedir otra letra.
+#    - Si la letra ingresada es correcta, actualizar el progreso.
+#    - Si la letra es incorrecta, aumentar el contador de intentos fallidos.
+#
+# 4. Si el jugador adivina toda la palabra antes de alcanzar los intentos fallidos, mostrar un mensaje de victoria.
+#    Si no adivina la palabra, mostrar un mensaje de derrota.
+
+# --------------------------------------
+# Parte teórica (se imprime al ejecutar)
+# --------------------------------------
+print("Objetivo: Adivinar la palabra secreta ingresando letras.")
+print("El juego termina si se adivina la palabra completa o si se alcanzan los intentos fallidos.\n")
+
+# -------------------------------------
+# Función pequeña para jugar adivinanza
+# -------------------------------------
+
+def jugar_adivinanza(palabra_secreta):
+    """
+    Juego de adivinanza donde el jugador intenta adivinar la palabra secreta
+    ingresando una letra a la vez. El juego termina cuando adivina la palabra
+    o cuando alcanza un número máximo de intentos fallidos.
+    """
+    # Inicializamos variables
+    palabra_secreta_lista = list(palabra_secreta)
+    progreso = ['_'] * len(palabra_secreta)
+    letras_adivinadas = []
+    intentos_fallidos = 0
+    intentos_maximos = 5  # Número máximo de intentos fallidos
+
+    # Bucle principal del juego
+    while intentos_fallidos < intentos_maximos:
+        print(f"Palabra: {' '.join(progreso)}")
+        print(f"Letras adivinadas: {', '.join(letras_adivinadas)}")
+        letra = input("Ingresa una letra: ").lower()
+
+        # Validación de entrada: Solo una letra y no un número
+        if len(letra) != 1 or not letra.isalpha():
+            print("Por favor, ingresa una sola letra.")
+            continue
+        
+        # Si la letra ya fue adivinada
+        if letra in letras_adivinadas:
+            print(f"Ya adivinaste la letra '{letra}'. Intenta con otra.")
+            continue
+        
+        # Agregar la letra a las letras adivinadas
+        letras_adivinadas.append(letra)
+
+        # Revisar si la letra está en la palabra secreta
+        if letra in palabra_secreta_lista:
+            for i in range(len(palabra_secreta_lista)):
+                if palabra_secreta_lista[i] == letra:
+                    progreso[i] = letra
+            print(f"¡Buena! La letra '{letra}' está en la palabra.")
+        else:
+            intentos_fallidos += 1
+            print(f"La letra '{letra}' no está en la palabra. Intentos fallidos: {intentos_fallidos}/{intentos_maximos}")
+
+        # Verificar si el jugador adivinó la palabra completa
+        if '_' not in progreso:
+            print(f"¡Felicidades! Has adivinado la palabra: {palabra_secreta}")
+            break
+
+    # Si se agotaron los intentos y no adivinó la palabra
+    if intentos_fallidos == intentos_maximos:
+        print(f"¡Perdiste! La palabra era: {palabra_secreta}")
+
+# -------------------------------
+# Pruebas con diferentes palabras
+# -------------------------------
+
+if __name__ == "__main__":
+    print("Probando el juego de Adivinar la Palabra con diferentes casos:\n")
+    
+    # Palabras para adiviniar
+    jugar_adivinanza("python")
+    jugar_adivinanza("programacion")
