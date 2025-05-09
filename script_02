@@ -1,0 +1,63 @@
+"""
+Validar Email Complejo
+Crear una función `validar_email(email)` que valide si un email contiene un único '@', un dominio después del punto (ej.: `.com`) y no tiene espacios.
+
+"""
+
+# 
+# Pseudocódigo - Validar Email Complejo
+# -------------------------------------
+# 
+# Inicio
+#
+# 1. Definir función principal llamada validar_email que reciba un string (el email a validar)
+#
+# 2. Verificar si el email contiene exactamente un '@':
+#     - Si no lo cumple, retornar FALSO
+#
+# 3. Verificar si el email NO contiene espacios:
+#     - Si contiene espacios, retornar FALSO
+#
+# 4. Separar el email en dos partes usando el '@':
+#     - Si falla la separación, retornar FALSO
+#
+# 5. Verificar si la parte del dominio (lo que está después del '@') contiene un punto '.':
+#     - Si no lo contiene, retornar FALSO
+#
+# 6. Si cumple todas las condiciones, retornar VERDADERO
+
+print("Objetivo: Verificar si un email cumple condiciones mínimas de validez.")
+print("Condiciones: un solo '@', sin espacios, y con un punto '.' en el dominio.\n")
+
+def tiene_un_solo_arroba(email):
+    return email.count('@') == 1
+
+def no_tiene_espacios(email):
+    return ' ' not in email
+
+def tiene_punto_despues_del_arroba(email):
+    try:
+        parte_usuario, parte_dominio = email.split('@')
+        return '.' in parte_dominio
+    except ValueError:
+        return False
+
+def validar_email(email):
+    """
+    Valida si el email cumple con todas las condiciones.
+    """
+    if not tiene_un_solo_arroba(email):
+        return False
+    if not no_tiene_espacios(email):
+        return False
+    if not tiene_punto_despues_del_arroba(email):
+        return False
+    return True
+
+# ---------------------------
+# Bloque principal de pruebas
+# ---------------------------
+if __name__ == "__main__":
+    email = input("Ingrese un email para validar: ")  # El usuario escribe el email
+    resultado = "Válido" if validar_email(email) else "Inválido"
+    print(f"El email '{email}' es: {resultado}")
