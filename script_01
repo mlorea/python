@@ -1,0 +1,41 @@
+"""
+
+Define una función llamada `buscar_reemplazar` que tome una lista de strings, una palabra a buscar (string), y una palabra de reemplazo (string) como parámetros.  
+- La función debe crear y devolver una nueva lista donde todas las ocurrencias de la palabra a buscar en los strings de la lista original sean reemplazadas por la palabra de reemplazo.
+
+"""
+
+
+# Parte teórica (se imprime al ejecutar)
+# --------------------------------------
+
+print("Objetivo: Reemplazar todas las ocurrencias de una palabra por otra en una lista de strings.")
+print("La función debe crear una nueva lista con los reemplazos realizados.\n")
+
+# --------------------------------
+# Función para buscar y reemplazar
+# --------------------------------
+
+def buscar_reemplazar(lista_de_strings, palabra_a_buscar, palabra_reemplazo):
+    nueva_lista = []
+    for string in lista_de_strings:
+        nueva_lista.append(string.replace(palabra_a_buscar, palabra_reemplazo))
+    return nueva_lista
+
+if __name__ == "__main__":
+    print("\n=== Inicio de pruebas ===")  # Mensaje para confirmar que el script se ejecuta
+    
+    lista_original = [
+        "La casa es grande",
+        "La casa está en la calle principal",
+        "La casa tiene un jardín bonito"
+    ]
+    palabra_a_buscar = "casa"
+    palabra_reemplazo = "departamento"
+
+    resultado = buscar_reemplazar(lista_original, palabra_a_buscar, palabra_reemplazo)
+
+    for original, modificado in zip(lista_original, resultado):
+        print(f"Original: {original} → Modificado: {modificado}")
+    
+    print("=== Fin de pruebas ===")  # Mensaje de cierre
