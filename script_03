@@ -1,0 +1,69 @@
+"""
+
+Calculadora de Promedios (Ignorando Valores No Numéricos)
+
+Define una función llamada `calcular_promedio_numerico` que tome una lista como parámetro.  
+- La función debe calcular y devolver el promedio de los elementos que sean numéricos (`int` o `float`) en la lista. Los elementos no numéricos deben ser ignorados. Si no hay números en la lista, la función debe devolver `0`.
+
+
+"""
+
+# Pseudocódigo - Calculadora de Promedios
+# ---------------------------------------
+#
+# Inicio
+#
+# 1. Definir la función principal llamada calcular_promedio_numerico que reciba una lista como parámetro.
+# 2. Filtrar la lista para que solo contenga elementos numéricos (int y float).
+# 3. Si la lista de números filtrados está vacía:
+#    - Retornar 0
+#
+# 4. Si no está vacía:
+#    - Calcular el promedio sumando todos los elementos numéricos y dividiendo por la cantidad de elementos numéricos.
+# 5. Retornar el promedio calculado.
+
+# --------------------------------------
+# Parte teórica (se imprime al ejecutar)
+# --------------------------------------
+print("Objetivo: Calcular el promedio de los valores numéricos de una lista, ignorando los no numéricos.")
+print("Si no hay valores numéricos, la función debe devolver 0.\n")
+
+# -----------------------------------------------
+# Función pequeña para calcular promedio numérico
+# -----------------------------------------------
+
+def calcular_promedio_numerico(lista):
+    """
+    Calcula y devuelve el promedio de los elementos numéricos (int o float) en la lista.
+    Los elementos no numéricos son ignorados.
+    Si no hay números, se devuelve 0.
+    """
+    # Filtrar solo los elementos numéricos (int o float)
+    numeros = [elemento for elemento in lista if isinstance(elemento, (int, float))]
+    
+    # Si no hay elementos numéricos, retornar 0
+    if not numeros:
+        return 0
+    
+    # Calcular y retornar el promedio de los números
+    return sum(numeros) / len(numeros)
+
+# ---------------------------
+# Pruebas con varios ejemplos
+# ---------------------------
+
+if __name__ == "__main__":
+    print("Probando función calcular_promedio_numerico con distintos casos:\n")
+
+    listas = [
+        [10, 20, 30, 40, 50],       # Lista con solo números
+        [10, 'a', 30, 'b', 50],     # Lista con algunos valores no numéricos
+        ['a', 'b', 'c'],            # Lista sin números
+        [1.5, 2.5, 3.5, 'x', 4.5],  # Lista con decimales y un valor no numérico
+        []                          # Lista vacía
+    ]
+
+    # Ejecutamos la función para cada lista de ejemplo
+    for lista in listas:
+        resultado = calcular_promedio_numerico(lista)
+        print(f"Lista: {lista} → Promedio: {resultado}")
